@@ -33,3 +33,4 @@ export class AppController {
     return this.summonerName;
     ;
   }
+}
