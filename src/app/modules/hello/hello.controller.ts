@@ -5,11 +5,10 @@ import { AppService } from '../../services/ServiceExample/app.service';
 
 @Controller()
 export class HelloController {
-  constructor(private readonly appService: AppService, private configService: ConfigService) { }
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {
-    console.log(this.configService.get<string>('LOL_API_KEY'))
     return this.appService.getHello();
   }
 }

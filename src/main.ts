@@ -3,11 +3,6 @@ import * as fs from 'fs';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
-import * as dotenv from 'dotenv'
-
-dotenv.config({ path: `../.env.${process.env.NODE_ENV}` })
-
-console.log(process.env.NODE_ENV)
 
 const pkg = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../package.json')).toString('utf-8'),
