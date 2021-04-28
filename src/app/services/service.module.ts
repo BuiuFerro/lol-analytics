@@ -1,15 +1,17 @@
 import { Global, HttpModule, HttpService, Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { LolService } from './LolService/lol.service';
 import { AppService } from './ServiceExample/app.service';
 
 
 @Global()
 @Module({
-  imports: [HttpModule],
-  exports: [AppService],
+  imports: [HttpModule, ConfigModule],
+  exports: [AppService, LolService],
   providers: [
     ConfigService,
-    AppService
+    AppService,
+    LolService,
   ],
 })
-export class ServiceModule {}
+export class ServiceModule { }
