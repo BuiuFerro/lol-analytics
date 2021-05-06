@@ -3,7 +3,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { SummonerInfoInterface } from 'src/app/interfaces/summonerInfo';
-import SummonerWithMatchListModel from 'src/app/models/summoner/summoner.model';
+import SummonerStatisticModel from 'src/app/models/summoner/summoner.model';
 import { SummonerBusiness } from './summoner.business';
 
 @Controller('summoner')
@@ -22,11 +22,11 @@ export class SummonerController {
   @ApiResponse({
     status: 200,
     description: 'Summoner data.',
-    type: SummonerWithMatchListModel,
+    type: SummonerStatisticModel,
   })
   findSummonerName(
     @Param('summonerName') summonerName: string,
-  ): Observable<SummonerWithMatchListModel> {
+  ): Observable<SummonerStatisticModel> {
     return this.summonerService.getSummoner(summonerName);
   }
 

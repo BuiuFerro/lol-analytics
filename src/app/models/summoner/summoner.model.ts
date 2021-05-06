@@ -1,18 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { ISummonerStatistics } from 'src/app/utils/interfaces/ISummonerStatistics';
-
-interface ISummonerWithMacthListModel {
-  name: string;
-  profileIconId: number;
-  summonerLevel: number;
-  statistic: ISummonerStatistics;
-}
+import Statistics from './statistics.model';
 
 @ObjectType()
-export default class SummonerWithMatchListModel
-  implements ISummonerWithMacthListModel {
+export default class SummonerStatisticModel {
   @ApiProperty({ required: true })
   @Field((type) => String)
   name: string;
@@ -25,5 +17,19 @@ export default class SummonerWithMatchListModel
   @Field((type) => Number)
   summonerLevel: number;
 
-  statistic: ISummonerStatistics;
+  @ApiProperty({ required: true })
+  @Field((type) => Statistics)
+  statistic: Statistics;
+
+  constructor(
+    name: string,
+    profileIconId: number,
+    summonerLevel: number,
+    statistic: Statistics,
+  ) {
+    this.name = name;
+    this.profileIconId = profileIconId;
+    this.summonerLevel = summonerLevel;
+    this.statistic = statistic;
+  }
 }

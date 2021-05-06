@@ -9,12 +9,13 @@ import { AxiosResponse } from 'axios';
 import { SummonerInfoInterface } from 'src/app/interfaces/summonerInfo';
 import { ISummonerMatchList } from 'src/app/utils/interfaces/ISummonerMatchList';
 import { MatchInfoInterface, Participant } from 'src/app/interfaces/matchInfo';
+import SummonerStatisticModel from 'src/app/models/summoner/summoner.model';
 
 @Injectable()
 export class SummonerBusiness {
   constructor(private lolService: LolService) {}
 
-  getSummoner(summonerName: string): Observable<any> {
+  getSummoner(summonerName: string): Observable<SummonerStatisticModel> {
     return this.lolService.getSummonerByName(summonerName).pipe(
       map(buildSummonerData()),
       mergeMap((summonerData) =>
@@ -22,8 +23,8 @@ export class SummonerBusiness {
           .getMatchList(summonerData.puuid)
           .pipe(map(buildSummonerMatchList(summonerData))),
       ),
-      mergeMap((summonerWithMatchListModel) => {
-        const observablesMatchList = summonerWithMatchListModel.macthList.map(
+      mergeMap((summonerWithMatchList) => {
+        const observablesMatchList = summonerWithMatchList.macthList.map(
           (matchid) => this.lolService.getMatchInfo(matchid),
         );
         return forkJoin([...observablesMatchList])
@@ -31,7 +32,7 @@ export class SummonerBusiness {
             map((match) => {
               const gamesList = findSummonerByMatchList(
                 match,
-                summonerWithMatchListModel,
+                summonerWithMatchList,
               );
               const statistics: ISummonerStatistics[] = buildSummonerStatisticsList(
                 gamesList,
@@ -50,7 +51,7 @@ export class SummonerBusiness {
                 name,
                 summonerLevel,
                 profileIconId,
-              } = summonerWithMatchListModel;
+              } = summonerWithMatchList;
               return {
                 name,
                 summonerLevel,
@@ -60,7 +61,6 @@ export class SummonerBusiness {
             }),
           );
       }),
-      map((e) => e),
     );
   }
 }
@@ -86,12 +86,10 @@ function buildSummonerStatisticsList(
 
 function findSummonerByMatchList(
   match: AxiosResponse<MatchInfoInterface>[],
-  summonerWithMatchListModel: ISummonerMatchList,
+  summonerWithMatchList: ISummonerMatchList,
 ) {
   return match.map(({ data: { info: { participants } } }) =>
-    participants.filter(
-      (fil) => fil.puuid === summonerWithMatchListModel.puuid,
-    ),
+    participants.filter((fil) => fil.puuid === summonerWithMatchList.puuid),
   );
 }
 
