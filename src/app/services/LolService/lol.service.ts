@@ -17,7 +17,6 @@ export class LolService {
   getSummonerByName(
     summonerName: string,
   ): Observable<AxiosResponse<SummonerInfoInterface>> {
-    summonerName = 'o Dont Blink o';
     return this.httpService.get<SummonerInfoInterface>(
       `${RIOT_API.SUMMONER_INFO_URL}/${summonerName}`,
       {
@@ -37,7 +36,7 @@ export class LolService {
         },
         params: {
           start: 0,
-          count: 20,
+          count: 5,
         },
       },
     );
