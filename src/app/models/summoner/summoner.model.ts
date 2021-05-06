@@ -2,75 +2,75 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface ISummonerModel {
-  id: string;
-  accountId: string;
-  puuid: string;
-  name: string;
-  profileIconId: number;
-  revisionDate: number;
-  summonerLevel: number;
-  macthList: string[];
+interface ISummonerWithMacthListModel {
+    id: string;
+    accountId: string;
+    puuid: string;
+    name: string;
+    profileIconId: number;
+    revisionDate: number;
+    summonerLevel: number;
+    macthList: string[];
 }
 
 @ObjectType()
-export default class SummonerModel implements ISummonerModel {
-  @ApiProperty({ required: true })
-  @Field((type) => String)
-  id: string;
+export default class SummonerWithMatchListModel implements ISummonerWithMacthListModel {
+    @ApiProperty({ required: true })
+    @Field((type) => String)
+    id: string;
 
-  @ApiProperty({ required: true })
-  @Field((type) => String)
-  accountId: string;
+    @ApiProperty({ required: true })
+    @Field((type) => String)
+    accountId: string;
 
-  @ApiProperty({ required: true })
-  @Field((type) => String)
-  puuid: string;
+    @ApiProperty({ required: true })
+    @Field((type) => String)
+    puuid: string;
 
-  @ApiProperty({ required: true })
-  @Field((type) => String)
-  name: string;
+    @ApiProperty({ required: true })
+    @Field((type) => String)
+    name: string;
 
-  @ApiProperty({ required: true })
-  @Field((type) => Number)
-  profileIconId: number;
+    @ApiProperty({ required: true })
+    @Field((type) => Number)
+    profileIconId: number;
 
-  @ApiProperty({ required: true })
-  @Field((type) => Number)
-  revisionDate: number;
+    @ApiProperty({ required: true })
+    @Field((type) => Number)
+    revisionDate: number;
 
-  @ApiProperty({ required: true })
-  @Field((type) => Number)
-  summonerLevel: number;
+    @ApiProperty({ required: true })
+    @Field((type) => Number)
+    summonerLevel: number;
 
-  @ApiProperty({ required: true })
-  @Field((type) => [String])
-  macthList: string[];
+    @ApiProperty({ required: true })
+    @Field((type) => [String])
+    macthList: string[];
 
-  constructor({
-    id,
-    accountId,
-    name,
-    puuid,
-    profileIconId,
-    revisionDate,
-    summonerLevel,
-    macthList,
-  }: ISummonerModel) {
-    this.id = id;
+    constructor({
+        id,
+        accountId,
+        name,
+        puuid,
+        profileIconId,
+        revisionDate,
+        summonerLevel,
+        macthList,
+    }: ISummonerWithMacthListModel) {
+        this.id = id;
 
-    this.accountId = accountId;
+        this.accountId = accountId;
 
-    this.puuid = puuid;
+        this.puuid = puuid;
 
-    this.name = name;
+        this.name = name;
 
-    this.profileIconId = profileIconId;
+        this.profileIconId = profileIconId;
 
-    this.revisionDate = revisionDate;
+        this.revisionDate = revisionDate;
 
-    this.summonerLevel = summonerLevel;
+        this.summonerLevel = summonerLevel;
 
-    this.macthList = macthList;
-  }
+        this.macthList = macthList;
+    }
 }
