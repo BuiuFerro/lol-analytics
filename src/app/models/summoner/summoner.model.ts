@@ -1,76 +1,76 @@
-import { Field, ObjectType } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Field, ObjectType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 interface ISummonerModel {
-  id: string,
-  accountId: string,
-  puuid: string,
-  name: string,
-  profileIconId: number,
-  revisionDate: number,
-  summonerLevel: number,
-  macthList: string[]
+  id: string;
+  accountId: string;
+  puuid: string;
+  name: string;
+  profileIconId: number;
+  revisionDate: number;
+  summonerLevel: number;
+  macthList: string[];
 }
 
 @ObjectType()
 export default class SummonerModel implements ISummonerModel {
   @ApiProperty({ required: true })
-  @Field(type => String)
-  id: string
-
-
-  @ApiProperty({ required: true })
-  @Field(type => String)
-  accountId: string
-
+  @Field((type) => String)
+  id: string;
 
   @ApiProperty({ required: true })
-  @Field(type => String)
-  puuid: string
-
-
-  @ApiProperty({ required: true })
-  @Field(type => String)
-  name: string
+  @Field((type) => String)
+  accountId: string;
 
   @ApiProperty({ required: true })
-  @Field(type => Number)
-  profileIconId: number
-
-
-  @ApiProperty({ required: true })
-  @Field(type => Number)
-  revisionDate: number
+  @Field((type) => String)
+  puuid: string;
 
   @ApiProperty({ required: true })
-  @Field(type => Number)
-  summonerLevel: number
+  @Field((type) => String)
+  name: string;
 
   @ApiProperty({ required: true })
-  @Field(type => [String])
-  macthList: string[]
+  @Field((type) => Number)
+  profileIconId: number;
 
+  @ApiProperty({ required: true })
+  @Field((type) => Number)
+  revisionDate: number;
 
-  constructor(
-    { id, accountId, name, puuid, profileIconId, revisionDate, summonerLevel, macthList }: ISummonerModel
-  ) {
+  @ApiProperty({ required: true })
+  @Field((type) => Number)
+  summonerLevel: number;
 
-    this.id = id
+  @ApiProperty({ required: true })
+  @Field((type) => [String])
+  macthList: string[];
 
-    this.accountId = accountId
+  constructor({
+    id,
+    accountId,
+    name,
+    puuid,
+    profileIconId,
+    revisionDate,
+    summonerLevel,
+    macthList,
+  }: ISummonerModel) {
+    this.id = id;
 
-    this.puuid = puuid
+    this.accountId = accountId;
 
-    this.name = name
+    this.puuid = puuid;
 
-    this.profileIconId = profileIconId
+    this.name = name;
 
-    this.revisionDate = revisionDate
+    this.profileIconId = profileIconId;
 
-    this.summonerLevel = summonerLevel
+    this.revisionDate = revisionDate;
 
-    this.macthList = macthList
+    this.summonerLevel = summonerLevel;
+
+    this.macthList = macthList;
   }
-
 }

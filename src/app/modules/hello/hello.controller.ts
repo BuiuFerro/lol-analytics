@@ -1,6 +1,5 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Query, Resolver } from '@nestjs/graphql';
 import { AppService } from '../../services/ServiceExample/app.service';
 
 @Controller()

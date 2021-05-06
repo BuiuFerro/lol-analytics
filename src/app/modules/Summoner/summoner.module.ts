@@ -9,4 +9,4 @@ import { ServiceModule } from 'src/app/services/service.module';
   controllers: [SummonerController],
   providers: [SummonerResolver, SummonerBusiness],
 })
-export class SummonerModule { }
+export class SummonerModule {}

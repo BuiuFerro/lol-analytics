@@ -8,9 +8,8 @@ import {
 @Controller('health')
 export class HealthController {
   constructor(
-    private health: HealthCheckService,
-    // private dns: DNSHealthIndicator,
-  ) { }
+    private health: HealthCheckService, // private dns: DNSHealthIndicator,
+  ) {}
 
   @Get()
   @HealthCheck()
