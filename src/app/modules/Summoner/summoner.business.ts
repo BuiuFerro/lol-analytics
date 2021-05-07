@@ -34,15 +34,8 @@ export class SummonerBusiness {
                 match,
                 summonerWithMatchList,
               );
-              const statistics: ISummonerStatistics[] = buildSummonerStatisticsList(
-                gamesList,
-              );
 
-              const statisticsGlobal: ISummonerStatistics = buildSummonerStatisticsGlobal(
-                statistics,
-              );
-
-              return statisticsGlobal;
+              return buildSummonerStatisticsList(gamesList);
             }),
           )
           .pipe(
@@ -74,14 +67,12 @@ function buildSummonerStatisticsGlobal(
 }
 
 function buildSummonerStatisticsList(
-  gamesList: Participant[][],
-): ISummonerStatistics[] {
-  return gamesList.map((game) =>
-    game.reduce((acc, value) => {
-      Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
-      return acc;
-    }, caculateStatistic),
-  );
+  gamesList: Participant[],
+): ISummonerStatistics {
+  return gamesList.reduce((acc, value) => {
+    Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
+    return acc;
+  }, caculateStatistic);
 }
 
 function findSummonerByMatchList(
@@ -89,7 +80,10 @@ function findSummonerByMatchList(
   summonerWithMatchList: ISummonerMatchList,
 ) {
   return match.map(({ data: { info: { participants } } }) =>
-    participants.filter((fil) => fil.puuid === summonerWithMatchList.puuid),
+    participants.find(
+      (fil) =>
+        fil.summonerName === summonerWithMatchList.name.toLocaleLowerCase(),
+    ),
   );
 }
 

@@ -36,7 +36,7 @@ export class LolService {
         },
         params: {
           start: 0,
-          count: 10,
+          count: 19,
         },
       },
     );
