@@ -57,22 +57,17 @@ export class SummonerBusiness {
     );
   }
 }
-function buildSummonerStatisticsGlobal(
-  statistics: ISummonerStatistics[],
-): ISummonerStatistics {
-  return statistics.reduce((acc, value) => {
-    Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
-    return acc;
-  }, caculateStatistic);
-}
 
 function buildSummonerStatisticsList(
   gamesList: Participant[],
 ): ISummonerStatistics {
-  return gamesList.reduce((acc, value) => {
-    Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
-    return acc;
-  }, caculateStatistic);
+  return gamesList.reduce(
+    (acc, value) => {
+      Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
+      return acc;
+    },
+    { ...caculateStatistic },
+  );
 }
 
 function findSummonerByMatchList(
