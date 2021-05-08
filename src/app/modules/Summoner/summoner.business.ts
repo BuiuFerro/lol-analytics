@@ -34,7 +34,6 @@ export class SummonerBusiness {
                 match,
                 summonerWithMatchList,
               );
-              console.log(match);
 
               return buildSummonerStatisticsList(gamesList);
             }),
@@ -64,7 +63,6 @@ function buildSummonerStatisticsList(
 ): ISummonerStatistics {
   return gamesList.reduce(
     (acc, value) => {
-      console.log(value);
       if (value) {
         Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
       }
