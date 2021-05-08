@@ -34,6 +34,7 @@ export class SummonerBusiness {
                 match,
                 summonerWithMatchList,
               );
+              console.log(match);
 
               return buildSummonerStatisticsList(gamesList);
             }),
@@ -63,7 +64,10 @@ function buildSummonerStatisticsList(
 ): ISummonerStatistics {
   return gamesList.reduce(
     (acc, value) => {
-      Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
+      console.log(value);
+      if (value) {
+        Object.keys(acc).forEach((key) => (acc[key] += Number(value[key])));
+      }
       return acc;
     },
     { ...caculateStatistic },
@@ -75,10 +79,10 @@ function findSummonerByMatchList(
   summonerWithMatchList: ISummonerMatchList,
 ) {
   return match.map(({ data: { info: { participants } } }) =>
-    participants.find(
-      (fil) =>
-        fil.summonerName === summonerWithMatchList.name.toLocaleLowerCase(),
-    ),
+    participants.find((fil) => {
+      fil.summonerName.toLocaleLowerCase() ===
+        summonerWithMatchList.name.toLocaleLowerCase();
+    }),
   );
 }
 
